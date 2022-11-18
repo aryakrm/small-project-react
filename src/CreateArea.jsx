@@ -1,0 +1,58 @@
+import React, { useState } from 'react';
+
+function CreateArea({ setToDos }) {
+    const [toDo, setToDo] = useState({
+        title: '',
+        content: '',
+    });
+
+    const [formDisplay, setFormDisplay] = useState(true);
+
+    function changeHandler(event) {
+        const { name, value } = event.target;
+        setToDo((prevTodo) => {
+            return {
+                ...prevTodo,
+                [name]: value,
+            };
+        });
+    }
+
+    function addTodo(e) {
+        e.preventDefault();
+        setToDos((prevTodos) => [
+            ...prevTodos,
+            { id: Math.random(), title: toDo.title, content: toDo.content },
+        ]);
+    }
+
+    function showForm() {
+        setFormDisplay(!formDisplay);
+    }
+
+    return (
+        <div>
+            <button onClick={showForm}>Add Todo</button>
+
+            <form style={{ display: `${formDisplay ? 'none' : 'block'}` }}>
+                <input
+                    name="title"
+                    type="text"
+                    value={toDo.title}
+                    onChange={changeHandler}
+                />
+                <input
+                    name="content"
+                    type="text"
+                    value={toDo.content}
+                    onChange={changeHandler}
+                />
+                <button type="submit" onClick={addTodo}>
+                    Add
+                </button>
+            </form>
+        </div>
+    );
+}
+
+export default CreateArea;
