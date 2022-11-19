@@ -1,17 +1,10 @@
 import React from 'react';
 
-function ToDos({ toDos }) {
+function ToDos({ title, content }) {
     return (
         <div>
-            {toDos &&
-                toDos.map((todo) => {
-                    return (
-                        <div key={todo.id}>
-                            <h1>{todo.title}</h1>
-                            <p>{todo.content}</p>
-                        </div>
-                    );
-                })}
+            <h1>{title}</h1>
+            <h1>{content}</h1>
         </div>
     );
 }

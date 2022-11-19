@@ -28,12 +28,29 @@ import ToDos from './ToDos';
 // ];
 
 function App() {
-    const { toDos, setToDos } = useState([]);
+    const [toDos, setToDos] = useState([]);
+
+    function submitTodo(newTodo) {
+        setToDos((prevNotes) => {
+            return [...prevNotes, newTodo];
+        });
+    }
+
     return (
         <div>
             <Nav />
-            <CreateArea setToDos={setToDos} toDos={toDos} />
-            <ToDos toDos={toDos} />
+            <CreateArea submitTodo={submitTodo} />
+            {toDos &&
+                toDos.map((toDo, index) => {
+                    return (
+                        <ToDos
+                            key={index}
+                            id={index}
+                            title={toDo.title}
+                            content={toDo.content}
+                        />
+                    );
+                })}
         </div>
     );
 }

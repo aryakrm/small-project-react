@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function CreateArea({ setToDos }) {
+function CreateArea({ submitTodo }) {
     const [toDo, setToDo] = useState({
         title: '',
         content: '',
@@ -18,16 +18,13 @@ function CreateArea({ setToDos }) {
         });
     }
 
-    function addTodo(e) {
-        e.preventDefault();
-        setToDos((prevTodos) => [
-            ...prevTodos,
-            { id: Math.random(), title: toDo.title, content: toDo.content },
-        ]);
-    }
-
     function showForm() {
         setFormDisplay(!formDisplay);
+    }
+
+    function addTodo(e) {
+        e.preventDefault();
+        submitTodo(toDo);
     }
 
     return (
